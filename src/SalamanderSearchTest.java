@@ -34,6 +34,59 @@ public class SalamanderSearchTest {
         assertFalse(actual);
     }
 
+    // additional unit tests for canReach
+    // sal adjacent to food
+    @Test
+    public void canReach_StartAdjacentToFood() {
+        char[][] enclosure = {
+                { '.', '.', '.' },
+                { '.', 's', 'f' },
+                { '.', '.', '.' }
+        };
+
+        boolean actual = SalamanderSearch.canReach(enclosure);
+        assertTrue(actual);
+    }
+
+    // food Walled in!
+    @Test
+    public void canReach_FoodWalledIn() {
+        char[][] enclosure = {
+                { '.', '.', '.', '.', '.' },
+                { '.', 's', 'W', '.', '.' },
+                { '.', 'W', 'f', 'W', '.' },
+                { '.', '.', 'W', '.', '.' },
+        };
+        boolean actual = SalamanderSearch.canReach(enclosure);
+        assertFalse(actual);
+    }
+
+    // multiple possible paths to food
+    @Test
+    public void canReach_MultiplePathsAvailable() {
+        char[][] enclosure = {
+                { '.', '.', '.', '.', 'f' },
+                { 's', 'W', '.', 'W', '.' },
+                { '.', '.', '.', '.', '.' },
+        };
+        boolean actual = SalamanderSearch.canReach(enclosure);
+        assertTrue(actual);
+    }
+
+    // extra large grid
+    @Test
+    public void canReach_LargeMazeComplexPath() {
+        char[][] enclosure = {
+                { 's', 'W', '.', '.', '.', '.', '.', '.', '.', '.' },
+                { '.', 'W', '.', 'W', 'W', 'W', 'W', 'W', '.', '.' },
+                { '.', '.', '.', '.', '.', '.', '.', 'W', '.', '.' },
+                { '.', 'W', 'W', 'W', 'W', 'W', '.', 'W', '.', '.' },
+                { '.', '.', '.', '.', '.', 'W', '.', '.', '.', 'f' }
+        };
+        boolean actual = SalamanderSearch.canReach(enclosure);
+        assertTrue(actual);
+    }
+
     @Test
     public void testSalamanderLocation_centerOfGrid() {
         char[][] enclosure = {
