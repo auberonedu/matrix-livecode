@@ -35,6 +35,47 @@ public class SalamanderSearchTest {
     }
 
     @Test
+    public void canReach_NoSalamanderOrFood() {
+        char[][] enclosure = {
+            {'.','.','.','.','.','.'},
+            {'W','W','W','W','.','.'},
+            {'.','.','W','.','.','W'},
+            {'.','W','.','.','W','.'},
+            {'W','.','W','.','.','.'},
+        };
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            SalamanderSearch.canReach(enclosure);
+        });
+        assertEquals("No salamander present", exception.getMessage());
+    }
+
+    @Test
+    public void canReach_FoodSurroundedByWalls() {
+        char[][] enclosure = {
+            {'s','.','.','.','.'},
+            {'.','W','W','W','.'},
+            {'.','W','f','W','.'},
+            {'.','W','W','W','.'},
+            {'.','.','.','.','.'},
+        };
+        boolean actual = SalamanderSearch.canReach(enclosure);
+        assertFalse(actual);
+    }
+
+    @Test
+    public void canReach_MultiplePaths() {
+        char[][] enclosure = {
+            {'.','.','.','f','.','.'},
+            {'.','W','W','.','W','.'},
+            {'.','W','.','.','W','.'},
+            {'.','W','W','.','W','.'},
+            {'s','.','.','.','.','.'}
+        };
+        boolean actual = SalamanderSearch.canReach(enclosure);
+        assertTrue(actual);
+    }
+
+    @Test
     public void testSalamanderLocation_centerOfGrid() {
         char[][] enclosure = {
             {'.', '.', '.'},
