@@ -61,6 +61,19 @@ public class SalamanderSearchTest {
     }
 
     @Test
+    public void canReach_NoWalls() {
+        char[][] enclosure = {
+            {'f','.','.','.','.','.'},
+            {'.','.','.','.','.','.'},
+            {'.','.','.','.','.','.'},
+            {'.','.','.','.','.','.'},
+            {'.','.','.','s','.','.'},
+        };
+        boolean actual = SalamanderSearch.canReach(enclosure);
+        assertTrue(actual);
+    }
+
+    @Test
     public void testSalamanderLocation_centerOfGrid() {
         char[][] enclosure = {
             {'.', '.', '.'},
