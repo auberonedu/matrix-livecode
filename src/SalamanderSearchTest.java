@@ -35,6 +35,45 @@ public class SalamanderSearchTest {
     }
 
     @Test
+    public void canReach_SalamanderAtFood() {
+        char[][] enclosure = {
+            {'.','.','.','.','.','.'},
+            {'W','W','W','W','f','.'},
+            {'.','.','W','.','.','s'},
+            {'W','W','.','.','W','.'},
+            {'W','.','W','.','.','.'},
+        };
+        boolean actual = SalamanderSearch.canReach(enclosure);
+        assertTrue(actual);
+    }
+
+    @Test
+    public void canReach_MultipleFoodLocations() {
+        char[][] enclosure = {
+            {'.','.','.','.','.','.'},
+            {'W','W','W','W','f','.'},
+            {'.','.','W','.','.','s'},
+            {'f','W','.','.','W','.'},
+            {'W','.','W','.','.','.'},
+        };
+        boolean actual = SalamanderSearch.canReach(enclosure);
+        assertTrue(actual);
+    }
+
+    @Test
+    public void canReach_NoFood() {
+        char[][] enclosure = {
+            {'.','.','.','.','.','.'},
+            {'W','W','W','W','s','.'},
+            {'.','.','W','.','.','W'},
+            {'W','W','.','.','W','.'},
+            {'W','.','W','.','.','.'},
+        };
+        boolean actual = SalamanderSearch.canReach(enclosure);
+        assertFalse(actual);
+    }
+
+    @Test
     public void testSalamanderLocation_centerOfGrid() {
         char[][] enclosure = {
             {'.', '.', '.'},
