@@ -1,5 +1,7 @@
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class SalamanderSearch {
     public static void main(String[] args) {
@@ -18,6 +20,17 @@ public class SalamanderSearch {
             {'f','W','.','.','W','.'},
             {'W','.','W','.','.','.'},
         };
+
+        Set<int[]> coordinateSet = new HashSet<>();
+        int[] coord1 = new int[]{1, 5};
+        int[] coord2 = new int[]{3, 7};
+        int[] coord3 = new int[]{3, 7};
+
+        coordinateSet.add(coord1);
+        coordinateSet.add(coord2);
+        coordinateSet.add(coord3);
+
+        System.out.println(coordinateSet.size());
     }
 
     /**
@@ -74,36 +87,55 @@ public class SalamanderSearch {
 
         List<int[]> moves = new ArrayList<>();
 
-        // UP
-        int newRow = currRow - 1;
-        int newCol = currCol;
-        if (newRow >= 0 && enclosure[newRow][newCol] != 'W') {
-            moves.add(new int[]{newRow, newCol});
-        }
+        int[][] directions = new int[][]{
+            {-1, 0},
+            {1, 0},
+            {0, -1},
+            {0, 1}
+        };
 
-        // DOWN
-        newRow = currRow + 1;
-        newCol = currCol;
-        if (newRow < enclosure.length && enclosure[newRow][newCol] != 'W') {
-            moves.add(new int[]{newRow, newCol});
-        }
+        for(int[] direction : directions) {
+            int newRow = currRow + direction[0];
+            int newCol = currCol + direction[1];
 
-        // LEFT
-        newRow = currRow;
-        newCol = currCol - 1;
-        if (newCol >= 0 && enclosure[newRow][newCol] != 'W') {
-            moves.add(new int[]{newRow, newCol});
-
-        }
-
-        // RIGHT
-        newRow = currRow;
-        newCol = currCol + 1;
-        if (newCol < enclosure[0].length && enclosure[newRow][newCol] != 'W') {
-            moves.add(new int[]{newRow, newCol});
+            if (newRow >= 0 && newRow < enclosure.length && 
+                newCol >= 0 && newCol < enclosure[0].length && 
+                enclosure[newRow][newCol] != 'W') {
+                    moves.add(new int[]{newRow, newCol});
+            }
         }
 
         return moves;
+        
+        // Long and dirty implementation
+        // // UP
+        // int newRow = currRow - 1;
+        // int newCol = currCol;
+        // if (newRow >= 0 && enclosure[newRow][newCol] != 'W') {
+        //     moves.add(new int[]{newRow, newCol});
+        // }
+
+        // // DOWN
+        // newRow = currRow + 1;
+        // newCol = currCol;
+        // if (newRow < enclosure.length && enclosure[newRow][newCol] != 'W') {
+        //     moves.add(new int[]{newRow, newCol});
+        // }
+
+        // // LEFT
+        // newRow = currRow;
+        // newCol = currCol - 1;
+        // if (newCol >= 0 && enclosure[newRow][newCol] != 'W') {
+        //     moves.add(new int[]{newRow, newCol});
+
+        // }
+
+        // // RIGHT
+        // newRow = currRow;
+        // newCol = currCol + 1;
+        // if (newCol < enclosure[0].length && enclosure[newRow][newCol] != 'W') {
+        //     moves.add(new int[]{newRow, newCol});
+        // }
     }
 
     public static int[] salamanderLocation(char[][] enclosure) {
