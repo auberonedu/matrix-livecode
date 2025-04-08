@@ -21,16 +21,20 @@ public class SalamanderSearch {
             {'W','.','W','.','.','.'},
         };
 
-        Set<int[]> coordinateSet = new HashSet<>();
-        int[] coord1 = new int[]{1, 5};
-        int[] coord2 = new int[]{3, 7};
-        int[] coord3 = new int[]{3, 7};
+        
+        // Set<int[]> coordinateSet = new HashSet<>();
+        // int[] coord1 = new int[]{1, 5};
+        // int[] coord2 = new int[]{3, 7};
+        // int[] coord3 = new int[]{3, 7};
 
-        coordinateSet.add(coord1);
-        coordinateSet.add(coord2);
-        coordinateSet.add(coord3);
+        // coordinateSet.add(coord1);
+        // coordinateSet.add(coord2);
+        // coordinateSet.add(coord3);
 
-        System.out.println(coordinateSet.size());
+        // System.out.println(coordinateSet.size());
+
+        Position pos = new Position(3, 5);
+        System.out.println(pos);
     }
 
     /**
@@ -106,7 +110,7 @@ public class SalamanderSearch {
         }
 
         return moves;
-        
+
         // Long and dirty implementation
         // // UP
         // int newRow = currRow - 1;
