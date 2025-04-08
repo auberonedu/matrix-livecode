@@ -1,7 +1,9 @@
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class SalamanderSearch {
     public static void main(String[] args) {
@@ -20,6 +22,16 @@ public class SalamanderSearch {
             {'f','W','.','.','W','.'},
             {'W','.','W','.','.','.'},
         };
+
+        Set<int[]> coordinateSet = new HashSet<>();
+        int[] coord1 = new int[]{1, 5};
+        int[] coord2 = new int[]{3, 7};
+        int[] coord3 = new int[]{1, 5};
+
+        coordinateSet.add(coord1);
+        coordinateSet.add(coord2);
+        coordinateSet.add(coord3);
+        System.out.println(coordinateSet.size());
     }
 
     /**
@@ -73,33 +85,28 @@ public class SalamanderSearch {
         // each int[] is coordinates /indices of location in 2d array
         List<int[]> moves = new ArrayList<>();
 
-        // moving UP ^
-        int newR = curR -1;
-        int newC= curC;
-        // if row is valid, and new location is not a wall, then add to list of valid moves
-        if(newR >= 0 && enclosure[newR][newC] != 'W'){
-            moves.add(new int[]{newR, newC});
-        }
+        // create array of direction arrays 
+        int[][] directions = new int[][]{
+            // up
+            {-1, 0},
+            // down
+            {1, 0},
+            // left
+            {0, -1},
+            // right
+            {0, 1}
+        };
 
-        // DOWN
-        newR = curR +1;
-        newC = curC;
-        if (newR < enclosure.length && enclosure[newR][newC] != 'W'){
-            moves.add(new int[]{newR, newC});
-        }
+        // use directions to change indices to check in different directions
+        for (int[] direction : directions){
+            int newR = curR + direction[0];
+            int newC = curC + direction[1];
 
-        // LEFT
-        newR = curR;
-        newC = curC -1;
-        if (newC >= 0 && enclosure[newR][newC] != 'W'){
-            moves.add(new int[]{newR, newC});
-        }
-
-        // RIGHT
-        newR = curR;
-        newC = curC + 1;
-        if (newC < enclosure[0].length && enclosure[newR][newC] != 'W'){
-            moves.add(new int[]{newR, newC});
+            if (newR >= 0 && newR < enclosure.length 
+            && newC >= 0 && newC < enclosure[0].length && 
+            enclosure[newR][newC] != 'W'){
+                moves.add(new int[]{newR, newC});
+            }
         }
 
         return moves;
