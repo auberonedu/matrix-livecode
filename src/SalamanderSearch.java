@@ -20,16 +20,22 @@ public class SalamanderSearch {
             {'W','.','W','.','.','.'},
         };
 
-        Set<int[]> coordinateSet = new HashSet<>();
-        int[] coord1 = new int[]{1, 5};
-        int [] coord2 = new int[]{3, 7};
-        int[] coord3 = new int[]{1, 5};
+        // Set<int[]> coordinateSet = new HashSet<>();
+        // int[] coord1 = new int[]{1, 5};
+        // int [] coord2 = new int[]{3, 7};
+        // int[] coord3 = new int[]{1, 5};
 
-        coordinateSet.add(coord1);
-        coordinateSet.add(coord2);
-        coordinateSet.add(coord3);
+        // coordinateSet.add(coord1);
+        // coordinateSet.add(coord2);
+        // coordinateSet.add(coord3);
 
-        System.out.println(coordinateSet.size());
+        // System.out.println(coordinateSet.size());
+
+        // canReach(enclosure1); 
+
+        Position pos = new Position(3, 5);
+        System.out.println(pos.row());
+        System.out.println(pos.col());
     }
 
     /**
@@ -71,6 +77,8 @@ public class SalamanderSearch {
         if (enclosure[curR][curC] == 'f') {
             return true;
         }
+
+        System.out.println(Arrays.toString(current));
 
         visited[curR][curC] = true;
 
