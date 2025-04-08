@@ -1,5 +1,7 @@
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class SalamanderSearch {
     public static void main(String[] args) {
@@ -18,6 +20,19 @@ public class SalamanderSearch {
             {'f','W','.','.','W','.'},
             {'W','.','W','.','.','.'},
         };
+
+        Set<int[]> coordinates = new HashSet<>();
+
+        int[] coord1 = new int[] {1,5};
+        int[] coord2 = new int[] {3,7};
+        int[] coord3 = new int[] {1,5};
+
+
+        coordinates.add(coord1);
+        coordinates.add(coord2);
+        // coordinates.add(coord3);
+        System.out.println(coordinates.size());
+        System.out.println(coordinates.contains(coord3));
     }
 
     /**
@@ -69,7 +84,7 @@ public class SalamanderSearch {
         for(int[] move : moves){
             if(canReach(enclosure, move, visited)){
                 return true;
-            };
+            }
         }
 
         return false; 
@@ -81,35 +96,51 @@ public class SalamanderSearch {
 
         List<int[]> moves = new ArrayList<>();
 
-        //Up 
-        int newR = curR - 1;
-        int newC = curC;
-        if(newR >= 0 && enclosure[newR][newC] != 'W'){
-            moves.add(new int[]{newR, newC});
+        int[][] directions = new int[][] {
+            {-1, 0},
+            {1, 0},
+            {0, -1},
+            {0, 1}
+        };
+
+        for(int[] direction : directions){
+            int newR = curR + direction[0];
+            int newC = curC + direction[1];
+
+            if(newR >= 0 && newR < enclosure.length && newC >= 0 
+            && newC < enclosure[0].length && enclosure[newR][newC] != 'W' ) {
+                moves.add(new int[] {newR, newC});
+            }
         }
+        // //Up 
+        // int newR = curR - 1;
+        // int newC = curC;
+        // if(newR >= 0 && enclosure[newR][newC] != 'W'){
+        //     moves.add(new int[]{newR, newC});
+        // }
 
-        //Down
-        newR =curR + 1;
-        newC = curC;
-        if(newR < enclosure.length && enclosure[newR][newC] != 'W'){
-            moves.add(new int[]{newR, newC});
-        }
+        // //Down
+        // newR = curR + 1;
+        // newC = curC;
+        // if(newR < enclosure.length && enclosure[newR][newC] != 'W'){
+        //     moves.add(new int[]{newR, newC});
+        // }
 
-        //Left
-        newR = curR;
-        newC = curC - 1;
+        // //Left
+        // newR = curR;
+        // newC = curC - 1;
 
-        if(newC >= 0 && enclosure[newR][newC] != 'W'){
-            moves.add(new int[]{newR, newC});
-        }
+        // if(newC >= 0 && enclosure[newR][newC] != 'W'){
+        //     moves.add(new int[]{newR, newC});
+        // }
 
-        //Right
-        newR = curR;
-        newC = curC + 1;
+        // //Right
+        // newR = curR;
+        // newC = curC + 1;
 
-        if(newC < enclosure[0].length && enclosure[newR][newC] != 'W'){
-            moves.add(new int[]{newR, newC});
-        }
+        // if(newC < enclosure[0].length && enclosure[newR][newC] != 'W'){
+        //     moves.add(new int[]{newR, newC});
+        // }
 
         return moves;
     }
