@@ -1,5 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class SalamanderSearch {
     public static void main(String[] args) {
@@ -18,6 +17,17 @@ public class SalamanderSearch {
             {'f','W','.','.','W','.'},
             {'W','.','W','.','.','.'},
         };
+
+        Set<int[]> coordinateSet = new HashSet<>();
+        int[] coord1 = new int[]{1, 5};
+        int[] coord2 = new int[]{3, 7};
+        int[] coord3 = new int[]{1, 5};
+
+        coordinateSet.add(coord1);
+        coordinateSet.add(coord2);
+        coordinateSet.add(coord3);
+
+        System.out.println(coordinateSet.size());
     }
 
     /**
@@ -74,35 +84,56 @@ public class SalamanderSearch {
 
         List<int[]> moves = new ArrayList<>();
 
-        // UP
-        int newR = curR - 1;
-        int newC = curC;
-        if (newR >= 0 && enclosure[newR][newC] != 'W') {
-            moves.add(new int[]{newR, newC});
-        }
+        // alternative way
+        int[][] directions = new int[][]{
+            {-1, 0},
+            {1, 0},
+            {0, -1},
+            {0, 1}
+        };
 
-        // DOWN
-        newR = curR + 1;
-        newC = curC;
-        if (newR < enclosure.length && enclosure[newR][newC] != 'W') {
-            moves.add(new int[]{newR, newC});
-        }
+        for (int[] direction : directions) {
+            int newR = curR + direction[0];
+            int newC = curC + direction[1];
 
-        // LEFT
-        newR = curR;
-        newC = curC - 1;
-        if (newC >= 0 && enclosure[newR][newC] != 'W') {
-            moves.add(new int[]{newR, newC});
-        }
-
-        // RIGHT
-        newR = curR;
-        newC = curC + 1;
-        if (newC < enclosure[0].length && enclosure[newR][newC] != 'W') {
-            moves.add(new int[]{newR, newC});
+            if (newR >= 0 && newR < enclosure.length && 
+                newC >= 0 && newC < enclosure[0].length && 
+                enclosure[newR][newC] != 'W') {
+                    moves.add(new int[]{newR, newC});
+            }
         }
 
         return moves;
+
+        // // UP
+        // int newR = curR - 1;
+        // int newC = curC;
+        // if (newR >= 0 && enclosure[newR][newC] != 'W') {
+        //     moves.add(new int[]{newR, newC});
+        // }
+
+        // // DOWN
+        // newR = curR + 1;
+        // newC = curC;
+        // if (newR < enclosure.length && enclosure[newR][newC] != 'W') {
+        //     moves.add(new int[]{newR, newC});
+        // }
+
+        // // LEFT
+        // newR = curR;
+        // newC = curC - 1;
+        // if (newC >= 0 && enclosure[newR][newC] != 'W') {
+        //     moves.add(new int[]{newR, newC});
+        // }
+
+        // // RIGHT
+        // newR = curR;
+        // newC = curC + 1;
+        // if (newC < enclosure[0].length && enclosure[newR][newC] != 'W') {
+        //     moves.add(new int[]{newR, newC});
+        // }
+
+        // return moves;
     }
 
     public static int[] salamanderLocation(char[][] enclosure) {
