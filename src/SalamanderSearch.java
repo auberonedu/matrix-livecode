@@ -18,6 +18,18 @@ public class SalamanderSearch {
             {'f','W','.','.','W','.'},
             {'W','.','W','.','.','.'},
         };
+
+        Set<int[]> coordinateSet = new HashSet<>();
+        int[] coord1 = new int[]{1, 5};
+        int[] coord2 = new int[]{3, 7};
+        int[] coord3 = new int[]{1, 5};
+
+        coordinateSet.add(coord1);
+        coordinateSet.add(coord2);
+        coordinateSet.add(coord3);
+
+        System.out.println(coordinateSet.size());
+
     }
 
     /**
@@ -94,35 +106,38 @@ public class SalamanderSearch {
         int currentCol = currentLocation[1];
 
         List<int[]> moves = new ArrayList<>();
-        
-        // UP
-        int newRow = currentRow - 1;
-        int newCol = currentCol;
-        if (newRow >= 0 && enclosure[newRow][newCol] != 'W') {
-            moves.add(new int[]{newRow, newCol});
-        }
 
-        // DOWN
-        newRow = currentRow + 1;
-        newCol = currentCol;
-        if (newRow < enclosure.length && enclosure[newRow][newCol] != 'W') {
-            moves.add(new int[]{newRow, newCol});
-        }
+         int[][] directions = new int[][] {
+            {-1, 0},
+            {1, 0},
+            {0, -1},
+            {0, 1}
+         };
 
-        // LEFT
-        newRow = currentRow;
-        newCol = currentCol - 1;
-        if (newCol >= 0 && enclosure[newRow][newCol] != 'W') {
-            moves.add(new int[]{newRow, newCol});
-        }
+         for (int[] direction: directions) {
+            int newRow = currentRow + direction[0];
+            int newCol = currentCol + direction[1];
 
-        // RIGHT
-        newRow = currentRow;
-        newCol = currentCol + 1;
-        if (newCol < enclosure[0].length && enclosure[newRow][newCol] != 'W') {
-            moves.add(new int[]{newRow, newCol});
-        }
+            // Note that the below check can also be moved to an isValid helper function
 
-        return moves;
+            if (newRow >= 0 && newRow < enclosure.length && 
+                newCol >= 0 && newCol < enclosure[0].length &&
+                enclosure[newRow][newCol] != 'W') {
+                    moves.add(new int[]{newRow, newCol});
+                }
+         }
+
+         return moves;
+
     }
 }
+
+
+
+        /*
+         * me rogavit
+         * nonne, novem mense, persolveris?
+         * Et ego risi
+         * Quia laeta aut tristis, 
+         * nescio
+         */
