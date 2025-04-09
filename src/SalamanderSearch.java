@@ -60,24 +60,31 @@ public class SalamanderSearch {
      * @return whether the salamander can reach the food
      */
     public static boolean canReach(char[][] enclosure) {
+        // use helper method to pinpoint current location
         int[] start = salamanderLocation(enclosure);
+        // create a visited matrix to store visited cells
         boolean[][] visited = new boolean[enclosure.length][enclosure[0].length];
+        // return the if its possible to reach target=food
         return canReach(enclosure, start, visited);
     }
 
     public static boolean canReach(char[][] enclosure, int[] current, boolean[][] visited) {
-        // base cases
+        // get current position
         int currRow = current[0];
         int currCol = current[1];
 
+        // base case 1: if already visited stop and avoid loops
         if (visited[currRow][currCol]) return false;
+        // base case 2: reached the goal if 'f' food is found
         if (enclosure[currRow][currCol] == 'f') return true;
 
-        // avoid cycles
+        // mark the cell as visited
         visited[currRow][currCol] = true;
 
-        // recurse and logic
+        // get all possible moves using helper method
         List<int[]> moves = possibleMoves(enclosure, current);
+
+        // recurse each move and check base cases, if reached goal return true
         for(int[] move : moves) {
             if(canReach(enclosure, move, visited)) return true;
         }
@@ -86,22 +93,28 @@ public class SalamanderSearch {
     }
 
     public static List<int[]> possibleMoves(char[][] enclosure, int[] current) {
+        // example int[] current = {0,2} - mark row as 0 and column as 2 
+        // to get correct coordinates of starter position
         int currRow = current[0];
         int currCol = current[1];
 
         List<int[]> moves = new ArrayList<>();
 
         int[][] directions = new int[][]{
-            {-1, 0},
-            {1, 0},
-            {0, -1},
-            {0, 1}
+            {-1, 0}, // up
+            {1, 0},  // down
+            {0, -1}, // left
+            {0, 1}   // right
         };
 
         for(int[] direction : directions) {
-            int newRow = currRow + direction[0];
-            int newCol = currCol + direction[1];
+            int newRow = currRow + direction[0]; // add first element in directions move
+            int newCol = currCol + direction[1]; // add second element in directions move
+            // ex: if current coord = 0,0 adding dir[0] and dir[1] means:
+            // 0 + -1 = -1 and 0 + 0 = 0 final: -1, 0 = go UP a row, same for other movements
 
+            // then check if a move is out of bounds or if its a wall
+            // if not add to a possible moves list called moves
             if (newRow >= 0 && newRow < enclosure.length && 
                 newCol >= 0 && newCol < enclosure[0].length && 
                 enclosure[newRow][newCol] != 'W') {
@@ -111,7 +124,7 @@ public class SalamanderSearch {
 
         return moves;
 
-        // Long and dirty implementation
+        // Long and dirty implementation:
         // // UP
         // int newRow = currRow - 1;
         // int newCol = currCol;
