@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -21,16 +22,19 @@ public class SalamanderSearch {
             {'W','.','W','.','.','.'},
         };
 
-        Set<int[]> coordinateSet = new HashSet<>();
-        int[] coord1 = new int[]{1, 5};
-        int[] coord2 = new int[]{3, 7};
-        int[] coord3 = new int[]{1, 5};
+        // Set<int[]> coordinateSet = new HashSet<>();
+        // int[] coord1 = new int[]{1, 5};
+        // int[] coord2 = new int[]{3, 7};
+        // int[] coord3 = new int[]{1, 5};
 
-        coordinateSet.add(coord1);
-        coordinateSet.add(coord2);
-        coordinateSet.add(coord3);
+        // coordinateSet.add(coord1);
+        // coordinateSet.add(coord2);
+        // coordinateSet.add(coord3);
 
-        System.out.println(coordinateSet.size());
+        // System.out.println(coordinateSet.size());
+
+        Position pos = new Position(3, 5);
+        System.out.println(pos);
     }
 
     /**
@@ -68,6 +72,8 @@ public class SalamanderSearch {
 
         if (visited[curR][curC]) return false;
         if (enclosure[curR][curC] == 'f') return true;
+
+        System.out.println(Arrays.toString(current));
 
         visited[curR][curC] = true;
 
