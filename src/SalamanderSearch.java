@@ -131,13 +131,3 @@ public class SalamanderSearch {
 
     }
 }
-
-
-
-        /*
-         * me rogavit
-         * nonne, novem mense, persolveris?
-         * Et ego risi
-         * Quia laeta aut tristis, 
-         * nescio
-         */
