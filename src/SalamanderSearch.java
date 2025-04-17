@@ -121,6 +121,8 @@ public class SalamanderSearch {
             }
         }
 
+        return moves;
+
         // // UP
         // int newR = curR - 1;
         // int newC = curC;
@@ -152,7 +154,5 @@ public class SalamanderSearch {
         // if (newC < enclosure[0].length && enclosure[newR][newC] != 'W') {
         //     moves.add(new int[]{newR, newC});
         // }
-
-        return moves;
     }
 }
